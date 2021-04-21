@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEScriptStorage", "SEScriptStorage\SEScriptStorage.csproj", "{235EF755-9F3C-4ED9-B71B-D670DB46EBA8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{235EF755-9F3C-4ED9-B71B-D670DB46EBA8}.Debug|x64.ActiveCfg = Debug|x64
+		{235EF755-9F3C-4ED9-B71B-D670DB46EBA8}.Debug|x64.Build.0 = Debug|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E32EAE52-A9EE-4D9A-ABBB-CEEBAA8D335A}
+	EndGlobalSection
+EndGlobal
