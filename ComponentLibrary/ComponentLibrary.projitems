@@ -12,6 +12,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)BlockControl\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Grid\BlockNamer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Grid\BlockRetriever.cs" />
   </ItemGroup>
 </Project>
