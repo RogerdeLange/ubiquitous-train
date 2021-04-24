@@ -24,19 +24,39 @@ namespace IngameScript
     {
         public static class BlockRetriever
         {
-            private static List<IMyEntity> blocks;
+            private static List<IMyTerminalBlock> blocks;
 
-            public static IEnumerable<T> GetBlocksOfType<T>(Program p, bool mainBlocksOnly = true) where T : IMyEntity
+            public static void GetBlocksOfType<T>(Program p, out List<T> list, bool mainBlocksOnly = true) where T : class, IMyTerminalBlock
             {
+                list = new List<T>();
                 if (blocks == null)
                     PopulateInternalList(p);
-                return (IEnumerable<T>)blocks.Where(r => r.GetType() == typeof(T));
+
+                p.Echo("Retrieving blocks of type " + typeof(T).Name);
+                p.GridTerminalSystem.GetBlocksOfType(list);
+                if (mainBlocksOnly)
+                    list = RemoveSupergridBlocks(p, list);
             }
 
             private static void PopulateInternalList(Program p)
             {
-                blocks = new List<IMyEntity>();
-                p.GridTerminalSystem.GetBlocksOfType(blocks);
+                blocks = new List<IMyTerminalBlock>();
+                p.GridTerminalSystem.GetBlocks(blocks);
+                p.Echo("Setting up cache with block count " + blocks.Count);
+            }
+
+            private static List<T> RemoveSupergridBlocks<T>(Program p, List<T> blocks) where T : class, IMyTerminalBlock
+            {
+                List<T> newList = new List<T>();
+                foreach (T cur in blocks)
+                {
+                    if (cur.CubeGrid == p.Me.CubeGrid)
+                    {
+                        newList.Add(cur);
+                    }
+                }
+
+                return newList;
             }
         }
     }

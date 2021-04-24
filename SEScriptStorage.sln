@@ -15,6 +15,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		ComponentLibrary\ComponentLibrary.projitems*{60c6a1c8-ed53-4d47-81cc-614fc533b98c}*SharedItemsImports = 13
 		ComponentLibrary\ComponentLibrary.projitems*{a6466218-9fa7-48c3-9736-7d83ef29f290}*SharedItemsImports = 4
+		ComponentLibrary\ComponentLibrary.projitems*{f15ac559-0dc5-4633-937a-4ae24f387ec5}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
