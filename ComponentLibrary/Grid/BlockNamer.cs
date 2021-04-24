@@ -22,38 +22,54 @@ namespace IngameScript
 {
     partial class Program
     {
-        private static readonly List<BlockNameEntry> nameConvertList = new List<BlockNameEntry>()
-        {
-            new BlockNameEntry(typeof(IMyAirVent), "Vent", true),
-            new BlockNameEntry(typeof(IMyBatteryBlock), "Batt", true),
-            new BlockNameEntry(typeof(IMySolarPanel), string.Empty, true),
-            new BlockNameEntry(typeof(IMyGyro), "Gyro", true),
-        };
+        //private static readonly List<BlockNameEntry<>> nameConvertList = new List<BlockNameEntry<IMyEntity>>()
+        //{
+        //    new BlockNameEntry<IMyAirVent>("Vent", true),
+        //    new BlockNameEntry<IMyBatteryBlock>("Batt", true),
+        //    new BlockNameEntry<IMySolarPanel>(string.Empty, true),
+        //    new BlockNameEntry<IMyGyro>("Gyro", true),
+        //};
 
 
         public static class BlockNamer
         {
+            
+            //new BlockNameEntry<IMyAirVent>("Vent", true);
+            //new BlockNameEntry<IMyBatteryBlock>("Batt", true);
+            //new BlockNameEntry<IMySolarPanel>(string.Empty, true);
+            //new BlockNameEntry<IMyGyro>("Gyro", true);
+
             public static void RenameBlocks(Program p)
             {
-                foreach(var b in nameConvertList)
-                {
+                //foreach(var b in nameConvertList)
+                //{
                     
-                    //BlockRetriever.GetBlocksOfType(b.BlockType)
-                }
+                //    //BlockRetriever.GetBlocksOfType(b.BlockType)
+                //}
             }
+
+
+            private static void SetName<T>(Program p, string name) where T : class
+            {
+                //var blocks = BlockRetriever.GetBlocksOfType()
+            }
+
         }
 
-        private class BlockNameEntry 
+        private class BlockNameEntry<T> where T : class
         {
-            public readonly Type BlockType;
+            public T BlockType;
+            public List<T> listStub;
             
-            public readonly string ShortName;
-            public readonly bool HideInTerminal;
-
-            public BlockNameEntry(Type blockType, string shortName, bool hideInTerminal = false){
-                this.BlockType = blockType;
+            public string ShortName;
+            public bool HideInTerminal;
+            
+            
+            public BlockNameEntry(string shortName, bool hideInTerminal = false)
+            {
                 this.ShortName = shortName;
                 this.HideInTerminal = hideInTerminal;
+                this.listStub = new List<T>();
             }
         }
     }
