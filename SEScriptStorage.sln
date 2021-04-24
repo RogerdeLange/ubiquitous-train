@@ -9,6 +9,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ComponentLibrary", "Compone
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShipUtilities", "ShipUtilities\ShipUtilities.csproj", "{A6466218-9FA7-48C3-9736-7D83EF29F290}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DroneController", "DroneController\DroneController.csproj", "{F15AC559-0DC5-4633-937A-4AE24F387EC5}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		ComponentLibrary\ComponentLibrary.projitems*{60c6a1c8-ed53-4d47-81cc-614fc533b98c}*SharedItemsImports = 13
@@ -22,6 +24,8 @@ Global
 		{235EF755-9F3C-4ED9-B71B-D670DB46EBA8}.Debug|x64.Build.0 = Debug|x64
 		{A6466218-9FA7-48C3-9736-7D83EF29F290}.Debug|x64.ActiveCfg = Debug|x64
 		{A6466218-9FA7-48C3-9736-7D83EF29F290}.Debug|x64.Build.0 = Debug|x64
+		{F15AC559-0DC5-4633-937A-4AE24F387EC5}.Debug|x64.ActiveCfg = Debug|x64
+		{F15AC559-0DC5-4633-937A-4AE24F387EC5}.Debug|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
