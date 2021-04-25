@@ -9,10 +9,10 @@
     <Import_RootNamespace>ComponentLibrary</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)BlockControl\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BlockControl\BlockStatusControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BlockControl\NavLightController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Grid\BlockNamer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Grid\BlockRetriever.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\BlockNameFormatter.cs" />
   </ItemGroup>
 </Project>

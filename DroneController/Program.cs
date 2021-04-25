@@ -58,16 +58,17 @@ namespace IngameScript
             BlockRetriever.GetBlocksOfType(this, out controlBlocks);
             BlockRetriever.GetBlocksOfType(this, out lightBlocks);
 
-            for (int i = 0; i < lightBlocks.Count; i++)
+            foreach(var light in lightBlocks)
             {
-                lightBlocks[i].BlinkIntervalSeconds = 1f;
-                lightBlocks[i].BlinkLength = 80f;
-                if (lightBlocks[i].CustomName.ToLower().Contains("navl"))
-                    lightBlocks[i].Color = Color.Red;
+                light.BlinkIntervalSeconds = 1f;
+                light.BlinkLength = 80f;
+                if (light.CustomName.ToLower().Contains("navl"))
+                    light.Color = Color.Red;
 
-                if (lightBlocks[i].CustomName.ToLower().Contains("navr"))
-                    lightBlocks[i].Color = Color.Green;
+                if (light.CustomName.ToLower().Contains("navr"))
+                    light.Color = Color.Green;
             }
+            
         }
 
 
@@ -108,6 +109,7 @@ namespace IngameScript
                 for (int i = 0; i < lights.Count; i++)
                 {
                     lights[i].Enabled = enabled;
+                    this.Echo(lights[i].DefinitionDisplayNameText);
                 }
             }
         }

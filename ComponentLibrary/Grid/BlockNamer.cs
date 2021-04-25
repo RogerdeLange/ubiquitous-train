@@ -41,9 +41,14 @@ namespace IngameScript
 
             public static void RenameBlocks(Program p)
             {
+                new BlockNameEntry<IMyAirVent>(p, "Vent", true);
+                new BlockNameEntry<IMyBatteryBlock>(p, "Batt", true);
+                new BlockNameEntry<IMySolarPanel>(p, string.Empty, true);
+                new BlockNameEntry<IMyGyro>(p, "Gyro", true);
+
                 //foreach(var b in nameConvertList)
                 //{
-                    
+
                 //    //BlockRetriever.GetBlocksOfType(b.BlockType)
                 //}
             }
@@ -56,8 +61,9 @@ namespace IngameScript
 
         }
 
-        private class BlockNameEntry<T> where T : class
+        private class BlockNameEntry<T> where T : class, IMyTerminalBlock
         {
+            private Program p;
             public T BlockType;
             public List<T> listStub;
             
@@ -65,11 +71,32 @@ namespace IngameScript
             public bool HideInTerminal;
             
             
-            public BlockNameEntry(string shortName, bool hideInTerminal = false)
+            public BlockNameEntry(Program p, string shortName, bool hideInTerminal = false)
             {
+                this.p = p;
                 this.ShortName = shortName;
                 this.HideInTerminal = hideInTerminal;
                 this.listStub = new List<T>();
+            }
+
+            public void ConvertEntry()
+            {
+                BlockRetriever.GetBlocksOfType(p, out this.listStub);
+                string oldNamme;
+                foreach(var entry in listStub)
+                {
+                    oldNamme = entry.DefinitionDisplayNameText;
+                    entry.CustomName = RemoveSubstring(entry.CustomName, oldNamme);
+                    
+                }
+            }
+
+            private string RemoveSubstring(string source, string substring)
+            {
+                int index = source.IndexOf(substring);
+                return (index < 0)
+                    ? source
+                    : source.Remove(index, substring.Length);
             }
         }
     }

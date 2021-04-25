@@ -26,14 +26,22 @@ namespace IngameScript
         {
             private static List<IMyTerminalBlock> blocks;
 
-            public static void GetBlocksOfType<T>(Program p, out List<T> list, bool mainBlocksOnly = true) where T : class, IMyTerminalBlock
+            public static void GetBlocksOfType<T>(Program p, out List<T> list, Func<T, bool> where = null, bool mainBlocksOnly = true) where T : class, IMyTerminalBlock
             {
                 list = new List<T>();
                 if (blocks == null)
                     PopulateInternalList(p);
 
                 p.Echo("Retrieving blocks of type " + typeof(T).Name);
-                p.GridTerminalSystem.GetBlocksOfType(list);
+                if(where == null)
+                {
+                    p.GridTerminalSystem.GetBlocksOfType(list);
+                }
+                else
+                {
+                    p.GridTerminalSystem.GetBlocksOfType(list, where);
+                }
+                
                 if (mainBlocksOnly)
                     list = RemoveSupergridBlocks(p, list);
             }
