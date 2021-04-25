@@ -22,11 +22,8 @@ namespace IngameScript
 {
     partial class Program : MyGridProgram
     {
-        List<IMyRemoteControl> controlBlocks = new List<IMyRemoteControl>();
-        List<IMyInteriorLight> lightBlocks = new List<IMyInteriorLight>();
-        bool shipActive;
+        NavLightController navLightController;
         bool setup;
-        bool alternateLightState;
 
         public Program()
         {
@@ -55,63 +52,13 @@ namespace IngameScript
 
         private void Setup()
         {
-            BlockRetriever.GetBlocksOfType(this, out controlBlocks);
-            BlockRetriever.GetBlocksOfType(this, out lightBlocks);
-
-            foreach(var light in lightBlocks)
-            {
-                light.BlinkIntervalSeconds = 1f;
-                light.BlinkLength = 80f;
-                if (light.CustomName.ToLower().Contains("navl"))
-                    light.Color = Color.Red;
-
-                if (light.CustomName.ToLower().Contains("navr"))
-                    light.Color = Color.Green;
-            }
-            
+            this.navLightController = new NavLightController(this);
         }
 
 
         private void Run()
         {
-            Echo("Lights under control: " + lightBlocks.Count);
-            if (lightBlocks == null || lightBlocks.Count == 0)
-            {
-                Echo("No light blocks controlled named 'nav'");
-                return;
-            }
-
-            
-            shipActive = this.GetShipIsActive(ref controlBlocks);
-            this.ControlWarningLights(shipActive, ref lightBlocks);
-            alternateLightState = !alternateLightState;
-        }
-
-
-
-        private bool GetShipIsActive(ref List<IMyRemoteControl> controls)
-        {
-            if (controls != null)
-            {
-                for (int i = 0; i < controls.Count; i++)
-                {
-                    if (controls[i].IsUnderControl || controls[i].IsAutoPilotEnabled)
-                        return true;
-                }
-            }
-            return false;
-        }
-
-        private void ControlWarningLights(bool enabled, ref List<IMyInteriorLight> lights)
-        {
-            if (lights != null)
-            {
-                for (int i = 0; i < lights.Count; i++)
-                {
-                    lights[i].Enabled = enabled;
-                    this.Echo(lights[i].DefinitionDisplayNameText);
-                }
-            }
+            navLightController.Tick();
         }
     }
 }

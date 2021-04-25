@@ -28,13 +28,16 @@ namespace IngameScript
             private const string NAVR = "navr";
             private Program p;
             List<IMyInteriorLight> lightBlocks = new List<IMyInteriorLight>();
+            List<IMyRemoteControl> controlBlocks = new List<IMyRemoteControl>();
+            bool lightsOn = false;
 
             public NavLightController(Program p)
             {
                 this.p = p;
                 BlockRetriever.GetBlocksOfType(p, out lightBlocks, r => r.CustomName.ToLower().Contains(NAVL) || r.CustomName.ToLower().Contains(NAVR));
+                BlockRetriever.GetBlocksOfType(p, out controlBlocks);
 
-                foreach(var light in lightBlocks.Where(r => r.CustomName.ToLower().Contains(NAVL)))
+                foreach (var light in lightBlocks.Where(r => r.CustomName.ToLower().Contains(NAVL)))
                 {
                     light.Color = Color.Red;
                 }
@@ -44,7 +47,16 @@ namespace IngameScript
                 }
             }
 
-            public void TurnOn()
+            public void Tick()
+            {
+                lightsOn = controlBlocks.Where(r => r.IsUnderControl || r.IsAutoPilotEnabled).Any();
+                if (lightsOn)
+                    TurnOn();
+                if (!lightsOn)
+                    TurnOff();
+            }
+
+            private void TurnOn()
             {
                 foreach(var light in lightBlocks)
                 {
@@ -54,7 +66,7 @@ namespace IngameScript
                 }
             }
 
-            public void TurnOff()
+            private void TurnOff()
             {
                 foreach (var light in lightBlocks)
                 {
