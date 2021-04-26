@@ -22,26 +22,17 @@ namespace IngameScript
 {
     partial class Program
     {
-        // Name structure: [prefix] Blockname index Other
-        public class BlockNameFormatter
+        public static class TickIndicator
         {
-            private Program p;
-            private IMyTerminalBlock Block;
-            public string Prefix { get; set; }
-            public string Name { get; set; }
-            public int Index { get; set; }
+            static int index;
+            static readonly string[] icons = new string[] {"|", "/", "-", "\\" };
 
-            public string Other { get; set; }
 
-            public BlockNameFormatter(Program p, IMyTerminalBlock block)
+            public static string Get()
             {
-                this.p = p;
-                GetNameComponents();
-            }
-
-            private void GetNameComponents()
-            {
-                string currentName = Block.CustomName;
+                if (index >= icons.Length)
+                    index = 0;
+                return "Active " + icons[index++];
             }
         }
     }

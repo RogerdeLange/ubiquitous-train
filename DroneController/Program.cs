@@ -23,6 +23,8 @@ namespace IngameScript
     partial class Program : MyGridProgram
     {
         NavLightController navLightController;
+        List<IMyRemoteControl> controlBlocks = new List<IMyRemoteControl>();
+        AutoPilotController AutoPilot;
         bool setup;
 
         public Program()
@@ -45,20 +47,33 @@ namespace IngameScript
                 setup = true;
                 return;
             }
-
-            Run();
+            Run(argument, updateSource);
         }
 
 
         private void Setup()
         {
             this.navLightController = new NavLightController(this);
+            BlockRetriever.GetBlocksOfType(this, out controlBlocks);
+            AutoPilot = new AutoPilotController(this, controlBlocks.First());
         }
 
 
-        private void Run()
+        private void Run(string argument, UpdateType updateSource)
         {
+            Echo(TickIndicator.Get());
+            if (AutoPilot.IsActive)
+                Runtime.UpdateFrequency = UpdateFrequency.Update1;
+            else
+                Runtime.UpdateFrequency = UpdateFrequency.Update100;
+
             navLightController.Tick();
+            AutoPilot.Tick();
+            if (!string.IsNullOrEmpty(argument))
+            {
+                int distance = int.Parse(argument);
+                AutoPilot.CommandMoveDirection(new Vector3D(distance, 0, 0));
+            }
         }
     }
 }
