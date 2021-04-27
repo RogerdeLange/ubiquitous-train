@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Grid\BlockRetriever.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\AutoPilotController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\BlockNameFormatter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\StringCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\TickIndicator.cs" />
   </ItemGroup>
 </Project>
